@@ -27,6 +27,18 @@ Ticket lifecycle:
 Rules:
 - never work on tickets that are not approved and `Ready`
 - never claim multiple tickets at once
+- require complete ticket inputs before implementation:
+  - title
+  - description
+  - component
+  - priority
+  - target repository
+  - inputs/context
+  - acceptance criteria
+  - expected output
+  - test plan
+  - dependencies or notes
+- if ticket detail is incomplete, set status to `Blocked` and request planner clarification in ticket comment
 - never mark `Done` without test evidence
 - include links and summaries, not raw long logs
 

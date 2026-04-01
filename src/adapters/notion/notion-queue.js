@@ -69,6 +69,22 @@ class InMemoryNotionQueue {
     return { ...ticket };
   }
 
+  block(ticketId, reason, missingFields = []) {
+    const ticket = this.tickets.find((t) => t.id === ticketId);
+    if (!ticket) {
+      return null;
+    }
+
+    ticket.status = "Blocked";
+    ticket.lastError = reason;
+    ticket.missingFields = missingFields.slice();
+    ticket.blockedAt = new Date().toISOString();
+    delete ticket.workerId;
+    delete ticket.lease;
+
+    return { ...ticket };
+  }
+
   recoverExpiredTickets(now = Date.now()) {
     let recovered = 0;
     for (const ticket of this.tickets) {

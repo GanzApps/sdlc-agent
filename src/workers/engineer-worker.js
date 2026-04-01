@@ -1,6 +1,7 @@
 "use strict";
 
 const { runWithRetry } = require("../libs/reliability/retry");
+const { validateTicketContract } = require("./ticket-contract");
 
 async function processNextTicket({ queue, workerId, executeTicket, logger, metrics, maxRetry = 3 }) {
   const next = queue.listReadyTickets()[0];
@@ -19,6 +20,25 @@ async function processNextTicket({ queue, workerId, executeTicket, logger, metri
     workflow_id: claimed.workflowId
   });
   metrics.increment("ticket_claim_total", 1);
+
+  const contractValidation = validateTicketContract(claimed);
+  if (!contractValidation.valid) {
+    const reason = `Ticket contract incomplete. Missing required fields: ${contractValidation.missing.join(", ")}`;
+    const blocked = queue.block(claimed.id, reason, contractValidation.missing);
+    metrics.increment("ticket_blocked_total", 1);
+    logger.warn("ticket.blocked", {
+      ticket_id: claimed.id,
+      status: blocked ? blocked.status : "Blocked",
+      missing_fields: contractValidation.missing
+    });
+
+    return {
+      handled: true,
+      status: blocked ? blocked.status : "Blocked",
+      ticket: blocked,
+      reason: "ticket_contract_incomplete"
+    };
+  }
 
   const start = Date.now();
   try {

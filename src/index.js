@@ -27,8 +27,16 @@ async function main() {
       id: "ENG-001",
       workflowId: "wf-demo-001",
       title: "Implement payment retry handler",
+      description: "Add retry-safe payment handling with observability",
+      component: "Backend API",
       status: "Ready",
       priority: 1,
+      targetRepository: "https://github.com/oeganz/sdlc-agent (feat/runtime-orchestrator-v1)",
+      inputsContext: "Tasktify artifacts and runtime requirements",
+      acceptanceCriteria: "Ticket execution reaches Review and includes test evidence",
+      expectedOutput: "PR URL and implementation summary",
+      testPlan: "Run unit + e2e tests",
+      dependenciesOrNotes: "No blocker",
       retryCount: 0,
       createdAt: new Date().toISOString()
     }

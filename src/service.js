@@ -22,8 +22,16 @@ function buildSeedTickets() {
       id: "ENG-001",
       workflowId: "wf-runtime-001",
       title: "Implement retry-safe API client",
+      description: "Build resilient API client with retry and observability",
+      component: "Backend API",
       status: "Ready",
       priority: 1,
+      targetRepository: "https://github.com/oeganz/sdlc-agent (feat/runtime-orchestrator-v1)",
+      inputsContext: "Tasktify PRD/Design/Tech Design docs",
+      acceptanceCriteria: "Execution path retries transient failures and returns summary",
+      expectedOutput: "Review-ready output with PR URL and test evidence",
+      testPlan: "Run npm test and include unit/e2e status",
+      dependenciesOrNotes: "No external blocker",
       retryCount: 0,
       createdAt: new Date().toISOString()
     }

@@ -44,12 +44,30 @@ Service endpoints:
 
 1. Product Agent writes PRD in Notion.
 2. Design Agent writes design output from approved PRD.
-3. Tech Lead Agent writes tech doc and ticket breakdown.
-4. Planner/Tech Lead creates engineering tickets in Notion backlog.
+3. Tech Lead Agent writes implementation-ready tech doc (HLD, impacted services, module details, sequence diagrams).
+4. Planner Agent creates engineering tickets in Notion/Jira from approved PRD + tech doc.
 5. Engineer Agent consumes `Ready` tickets and moves:
    - `Ready -> In Progress -> Review -> Done`
    - failed recoverable execution: retry/requeue
    - exhausted retry: `Failed`
+
+## Ticket Contract (Required)
+
+Every engineering ticket must be implementation-ready before status `Ready`.
+
+Required fields:
+- Title
+- Description
+- Component
+- Priority
+- Target Repository (repo URL + base branch)
+- Inputs and Context (PRD/Design/TechDoc links, constraints, references)
+- Acceptance Criteria (clear pass/fail points)
+- Expected Output (exact behavior or deliverable)
+- Test Plan (unit/e2e scope and evidence format)
+- Dependencies or Notes
+
+If one or more required fields are missing, Engineer Agent should set ticket status to `Blocked` and request clarification from Planner Agent.
 
 ## Reliability Model
 

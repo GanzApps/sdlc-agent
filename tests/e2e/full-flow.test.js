@@ -8,6 +8,27 @@ const { processNextTicket } = require("../../src/workers/engineer-worker");
 const { createLogger } = require("../../src/libs/observability/logger");
 const { MetricsRegistry } = require("../../src/libs/observability/metrics");
 
+function buildCompleteTicket(overrides = {}) {
+  return {
+    id: "ENG-E2E-1",
+    workflowId: "wf-e2e",
+    title: "build feature",
+    description: "Deliver one runtime feature",
+    component: "Backend API",
+    priority: 1,
+    targetRepository: "https://github.com/oeganz/sdlc-agent (feat/runtime-orchestrator-v1)",
+    inputsContext: "Tasktify implementation docs",
+    acceptanceCriteria: "Ticket reaches Review status",
+    expectedOutput: "PR output with tests info",
+    testPlan: "Execute unit + e2e",
+    dependenciesOrNotes: "None",
+    status: "Ready",
+    retryCount: 0,
+    createdAt: "2026-04-01T00:00:00.000Z",
+    ...overrides
+  };
+}
+
 test("e2e: workflow progresses to engineering and processes one ticket", async () => {
   const logger = createLogger({ test: "e2e" });
   const metrics = new MetricsRegistry();
@@ -19,17 +40,7 @@ test("e2e: workflow progresses to engineering and processes one ticket", async (
   workflow.transition("TICKETS");
   workflow.transition("ENGINEERING");
 
-  const queue = new InMemoryNotionQueue([
-    {
-      id: "ENG-E2E-1",
-      workflowId: "wf-e2e",
-      title: "build feature",
-      status: "Ready",
-      priority: 1,
-      retryCount: 0,
-      createdAt: "2026-04-01T00:00:00.000Z"
-    }
-  ]);
+  const queue = new InMemoryNotionQueue([buildCompleteTicket()]);
 
   const result = await processNextTicket({
     queue,
@@ -50,15 +61,10 @@ test("e2e: workflow progresses to engineering and processes one ticket", async (
 
 test("e2e: self-healing requeues expired in-progress ticket", () => {
   const queue = new InMemoryNotionQueue([
-    {
+    buildCompleteTicket({
       id: "ENG-E2E-2",
-      workflowId: "wf-e2e",
-      title: "recover",
-      status: "Ready",
-      priority: 1,
-      retryCount: 0,
-      createdAt: "2026-04-01T00:00:00.000Z"
-    }
+      title: "recover"
+    })
   ]);
 
   const claimed = queue.claimTicket("ENG-E2E-2", "worker", 1);

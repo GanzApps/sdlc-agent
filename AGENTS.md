@@ -14,9 +14,9 @@ General rules:
 Workflow:
 1. Product Agent creates or updates the PRD in Notion.
 2. Design Agent reads the approved PRD and creates design output in Figma.
-3. Tech Lead Agent reads the PRD and design output, then writes a tech spec in Notion.
-4. Planner or Tech Lead Agent breaks work into engineering tickets in Notion.
-5. Engineer Agent consumes `Ready` tickets and moves them through `In Progress` -> `Review` -> `Done`.
+3. Tech Lead Agent reads the PRD and design output, then writes HLD + impacted services + module details + sequence diagrams in Notion.
+4. Planner Agent breaks work into engineering tickets in Notion or Jira with repo target, inputs/context, AC, and expected output.
+5. Engineer Agent consumes `Ready` tickets and moves them through `In Progress` -> `Review` -> `Done` (or `Blocked` if ticket contract is incomplete).
 
 Artifact handoff format:
 - type
