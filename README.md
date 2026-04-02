@@ -1,7 +1,7 @@
 # SDLC Agent Runtime
 
 Codex-oriented SDLC workspace with:
-- role skills (`product`, `design`, `techlead`, `planner`, `engineer`, `incident-engineer`, `devops`)
+- role skills (`product`, `design`, `techlead`, `planner`, `planner-ticket-creator`, `ticket-quality-gate`, `engineer`, `incident-engineer`, `devops`)
 - runtime scaffold for orchestration and worker execution
 - baseline reliability, observability, and test coverage
 - CI and deployment workflow templates
@@ -46,7 +46,9 @@ Service endpoints:
 2. Design Agent writes design output from approved PRD.
 3. Tech Lead Agent writes implementation-ready tech doc (HLD, impacted services, module details, sequence diagrams).
 4. Planner Agent creates engineering tickets in Notion/Jira from approved PRD + tech doc.
-5. Engineer Agent consumes `Ready` tickets and moves:
+5. Planner Ticket Creator enforces FE/BE split and normalized ticket structure.
+6. Ticket Quality Gate validates ticket contract completeness before execution.
+7. Engineer Agent consumes `Ready` tickets and moves:
    - `Ready -> In Progress -> Review -> Done`
    - failed recoverable execution: retry/requeue
    - exhausted retry: `Failed`
@@ -67,17 +69,26 @@ Planner and Tech Lead artifacts must include this baseline in ticket/docs contex
 
 Every engineering ticket must be implementation-ready before status `Ready`.
 
-Required fields:
-- Title
-- Description
+Required properties:
+- Title (format: `[DOMAIN][Story-Slug] ...`)
+- PRD Story
 - Component
 - Priority
 - Target Repository (repo URL + base branch)
-- Inputs and Context (PRD/Design/TechDoc links, constraints, references)
-- Acceptance Criteria (clear pass/fail points)
-- Expected Output (exact behavior or deliverable)
-- Test Plan (unit/e2e scope and evidence format)
+- Impact Type
+- FE Mock Strategy (for FE tickets)
 - Dependencies or Notes
+
+Required ticket body sections:
+- `# Context`
+- `# Scope`
+- `# Acceptance Criteria` (clear pass/fail points)
+- `# Definition of Done`
+- `# References` (must include PRD + Tech Design + relevant Module Design)
+
+Split policy:
+- FE and BE must be separate tickets.
+- Mixed ownership title like `[FE+BE]` is invalid and must be blocked.
 
 If one or more required fields are missing, Engineer Agent should set ticket status to `Blocked` and request clarification from Planner Agent.
 

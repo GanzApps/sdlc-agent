@@ -44,39 +44,36 @@ Task rules:
 - include explicit frontend/backend parallelization strategy:
   - indicate whether FE can start with mock contract before BE is done
   - create separate mock ticket when FE can proceed in parallel
+  - FE and BE tickets must stay separate; never create `[FE+BE]` mixed ownership tickets
 
 Each task should include:
 - Title
 - Story ID / Story Name
-- Description
 - Component
 - Priority
 - Target Repository (URL + branch/base branch guidance)
-- Impact Type (`FE`, `BE`, `FE+BE`, `Infra`, `Integration`)
+- Impact Type (`FE`, `BE`, `Infra`, `Integration`, `AI`)
 - FE Mock Strategy (`yes/no`) and mock source (`contract fixture`, `MSW`, etc.) when relevant
-- Inputs and Context (artifact links, API/doc references, constraints), including:
-  - PRD link
-  - Tech doc link
-  - DoD Global link
-  - API Contract Appendix link
-  - Env and Secret Matrix link
-  - Implementation Stack line: `NestJS + PostgreSQL` for backend tickets, `Next.js` for frontend tickets, plus `Redis` when required
-- Acceptance Criteria
-- Expected Output (code/runtime behavior, endpoint/schema/UI changes, logs/metrics impact)
-- Test Plan (unit/e2e scope and minimum evidence to attach)
 - Dependency or Notes if needed
 - Dependency fields:
   - `depends_on` (ticket IDs this ticket requires)
   - `blocked_by` (external blockers if any)
+- Body sections (in ticket content/RTF, not as extra DB fields):
+  - `# Context`
+  - `# Scope`
+  - `# Acceptance Criteria`
+  - `# Definition of Done`
+  - `# References` (must include PRD + Tech Design + relevant Module Design)
 
 Validation gate before marking ticket `Ready`:
 - all required fields above are non-empty
 - acceptance criteria are testable (pass/fail)
-- test plan mentions minimum unit/e2e evidence
 - stack baseline is explicit and consistent with default stack policy
 - story reference is present and title follows `[DOMAIN][Story] ...` format
 - FE/BE dependency and mock strategy are explicit for every FE/BE ticket
+- ticket is single-owner (`FE` or `BE`), no mixed `[FE+BE]` domain
 - if any required field is missing, keep ticket out of `Ready` and complete it first
+- run `ticket-quality-gate` skill before handoff to Engineer Agent
 
 Suggested components:
 - backend
