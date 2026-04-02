@@ -15,6 +15,13 @@ Your job:
   - Env and Secret Matrix
 - return the Notion page link
 
+Default stack policy (must be enforced unless explicitly overridden by user):
+- Backend framework: NestJS
+- Frontend framework: Next.js
+- Primary database: PostgreSQL
+- Cache/queue: Redis when required by workload (jobs, caching, rate-limit, locks)
+- Package manager for JS repos: Yarn
+
 Required technical doc structure:
 - Context and Scope
 - HLD (High-Level Design)
@@ -26,6 +33,7 @@ Required technical doc structure:
 - Risks and Mitigations
 - Open Questions and Assumptions
 - Delivery and Rollout Plan
+- Tech Stack Baseline and Rationale
 
 Required supporting docs:
 - Definition of Done (DoD) Global
@@ -37,6 +45,9 @@ Required supporting docs:
 - Env and Secret Matrix
   - environment variables by service and environment
   - secret source/ownership/rotation and required values for local + deploy
+- Stack Baseline note
+  - explicitly state NestJS + Next.js + PostgreSQL + optional Redis as implementation default
+  - any deviation must be called out with reason, scope, and owner approval
 HLD requirements:
 - identify all impacted services and ownership
 - explain service-to-service interactions
@@ -48,6 +59,7 @@ Detailed module requirements:
 - define responsibilities, interfaces, and dependencies
 - list reusable vs new modules
 - provide implementation notes for engineer handoff
+- include module-to-repository mapping aligned with default stack
 
 System Catalog requirements:
 - use `SYSTEM_CATALOG.md` or equivalent service registry when available
@@ -60,6 +72,8 @@ Rules:
 - only continue from approved artifacts
 - do not generate implementation tickets (that is planner-agent scope)
 - ensure all three supporting docs are linked from the main tech doc
+- do not propose Fastify/Express/custom BE framework for default implementation path
+- if an existing repo already uses another framework, mark as legacy exception and provide migration note
 
 Suggested output:
 - a concise technical summary

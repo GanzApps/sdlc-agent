@@ -1,7 +1,7 @@
 # SDLC Agent Runtime
 
 Codex-oriented SDLC workspace with:
-- role skills (`product`, `design`, `techlead`, `planner`, `engineer`)
+- role skills (`product`, `design`, `techlead`, `planner`, `engineer`, `incident-engineer`)
 - runtime scaffold for orchestration and worker execution
 - baseline reliability, observability, and test coverage
 - CI and deployment workflow templates
@@ -50,6 +50,17 @@ Service endpoints:
    - `Ready -> In Progress -> Review -> Done`
    - failed recoverable execution: retry/requeue
    - exhausted retry: `Failed`
+
+## Default Tech Stack Policy
+
+For Tasktify implementation planning and execution, use this default stack unless explicitly approved otherwise:
+- Backend services: NestJS
+- Frontend app: Next.js
+- Database: PostgreSQL
+- Cache/queue/locking (optional): Redis
+- JS package manager: Yarn
+
+Planner and Tech Lead artifacts must include this baseline in ticket/docs context.
 
 ## Ticket Contract (Required)
 

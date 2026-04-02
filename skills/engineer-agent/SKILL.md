@@ -18,6 +18,12 @@ Required implementation standards:
 - add self-healing behavior where relevant (retry/backoff, timeout handling, idempotent retry-safe behavior)
 - add unit tests for changed business logic
 - add or update e2e tests for the main user path
+- follow default stack baseline unless ticket explicitly approved as exception:
+  - backend: NestJS
+  - frontend: Next.js
+  - database: PostgreSQL
+  - Redis only when needed for cache/queue/locks/rate-limit
+  - JavaScript package manager: Yarn
 
 Ticket lifecycle:
 - `Ready` -> `In Progress` -> `Review` -> `Done`
@@ -42,6 +48,7 @@ Rules:
   - test plan
   - dependencies or notes
 - if ticket detail is incomplete, set status to `Blocked` and request planner clarification in ticket comment
+- if ticket stack/framework conflicts with baseline and no exception note exists, set status to `Blocked` and request tech lead clarification
 - never mark `Done` without test evidence
 - include links and summaries, not raw long logs
 

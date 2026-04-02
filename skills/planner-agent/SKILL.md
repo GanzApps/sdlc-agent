@@ -16,6 +16,13 @@ Your job:
 - write the tasks into Notion or Jira through MCP
 - return the ticket board/database link
 
+Default stack policy (must be reflected in every engineering ticket unless explicitly overridden):
+- Backend: NestJS
+- Frontend: Next.js
+- Database: PostgreSQL
+- Redis: add when needed for cache/queue/locks/rate limit
+- JS package manager: Yarn
+
 Task rules:
 - keep tasks practical and hackathon-sized
 - prefer 8 to 15 tasks for MVP
@@ -38,6 +45,7 @@ Each task should include:
   - DoD Global link
   - API Contract Appendix link
   - Env and Secret Matrix link
+  - Implementation Stack line: `NestJS + PostgreSQL` for backend tickets, `Next.js` for frontend tickets, plus `Redis` when required
 - Acceptance Criteria
 - Expected Output (code/runtime behavior, endpoint/schema/UI changes, logs/metrics impact)
 - Test Plan (unit/e2e scope and minimum evidence to attach)
@@ -47,6 +55,7 @@ Validation gate before marking ticket `Ready`:
 - all required fields above are non-empty
 - acceptance criteria are testable (pass/fail)
 - test plan mentions minimum unit/e2e evidence
+- stack baseline is explicit and consistent with default stack policy
 - if any required field is missing, keep ticket out of `Ready` and complete it first
 
 Suggested components:
