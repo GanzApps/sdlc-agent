@@ -12,7 +12,7 @@ General rules:
 - Engineer Agent must treat the Notion ticket's `Target Repository` as the source-of-truth for where implementation happens.
 - If the current workspace does not match the ticket target repository, Engineer Agent should block on repository/workspace alignment and pass an artifact handoff instead of implementing in the wrong repo.
 - Use Incident Engineer Agent to handle monitoring-driven incident tickets created by self-healing intake service.
-- Use DevOps Agent to provision one Azure VM for the Tasktify `dev` environment with Terraform and deploy services from the `main` branch through GitHub Actions.
+- Use DevOps Agent to accept requests such as `provide <project_name> <environment>`, prepare Terraform branch/PR/plan in `tasktify-terraform`, then apply and deploy through GitHub Actions only after approval.
 - Ask for approval before moving to the next stage.
 - Pass artifacts (URLs, IDs, summaries), not whole chat history.
 
@@ -25,7 +25,7 @@ Workflow:
 6. Ticket Quality Gate skill validates ticket contract and blocks incomplete tickets before execution.
 7. Engineer Agent consumes `Ready` tickets and moves them through `In Progress` -> `Review` -> `Done` (or `Blocked` if ticket contract is incomplete).
 8. Incident Engineer Agent consumes monitoring incident tickets from Notion and delivers fix PRs with evidence back to the ticket.
-9. DevOps Agent provisions or updates one Azure VM for `dev` with Terraform in `tasktify-terraform`, then deploys Tasktify services from their repositories' `main` branch through GitHub Actions and verifies health.
+9. DevOps Agent accepts an infrastructure request such as `provide tasktify staging`, prepares the Terraform branch/PR/plan in `tasktify-terraform`, waits for approval, then applies the target environment and verifies deployment health.
 
 Artifact handoff format:
 - type

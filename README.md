@@ -52,7 +52,29 @@ Service endpoints:
    - `Ready -> In Progress -> Review -> Done`
    - failed recoverable execution: retry/requeue
    - exhausted retry: `Failed`
-6. DevOps Agent provisions one Azure `dev` VM in `tasktify-terraform`, manages ACR-backed deployment assumptions, and deploys app/services from `main` via GitHub Actions.
+8. DevOps Agent accepts requests such as `provide tasktify staging`, prepares Terraform changes in `tasktify-terraform`, opens a PR with plan evidence, waits for approval, then triggers apply and deploys app/services from `main` via GitHub Actions.
+
+## DevOps Automation Model
+
+DevOps requests are intent-based. Example:
+
+```text
+provide tasktify staging
+```
+
+Expected DevOps Agent behavior:
+- parse `project_name=tasktify` and `environment=staging`
+- select or create the matching Terraform stack in `tasktify-terraform`
+- prepare a feature branch and PR
+- produce `terraform plan` evidence for review
+- wait for explicit approval before apply
+- trigger the GitHub Actions apply workflow for the requested environment
+- verify Azure resources, deployment health, and final endpoints
+
+Current safety model:
+- merge does not provision infrastructure automatically
+- Terraform apply remains approval-gated
+- GitHub Actions is the execution layer for apply and deployment
 
 ## Default Tech Stack Policy
 
