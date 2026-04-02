@@ -31,6 +31,10 @@ Required implementation standards:
   - favicon / app icon
   - page title / metadata
   - approved logo assets if design provides them
+- for frontend tickets that use Pencil as the design source-of-truth, visual review is required before `Review`:
+  - compare the implemented page against the live Pencil `.pen` frame, not only exported screenshots
+  - inspect the rendered page for visual defects such as icon bleed, stretched containers, wrong glyphs, stale copy, spacing drift, and token mismatches
+  - after any review fix, rerun the relevant screenshot/e2e evidence and visually confirm the refreshed output before resubmitting
 - for frontend tickets, treat production build as part of readiness, not an optional extra:
   - run `yarn build` before moving to `Review`
 - follow default stack baseline unless ticket explicitly approved as exception:
@@ -71,6 +75,9 @@ Rules:
   - dependencies or notes
 - reject mixed-ownership tickets (`[FE+BE]`) and request Planner split into FE and BE tickets
 - if ticket detail is incomplete, set status to `Blocked` and request planner clarification in ticket comment
+- if ticket execution properties conflict with the ticket body or mode description, set status to `Blocked` and comment the exact mismatch before implementation:
+  - treat execution properties such as `FE Mock Strategy`, target repository, base branch, and execution mode as contract inputs
+  - do not proceed on assumptions when the body says one thing and the execution properties say another
 - if ticket stack/framework conflicts with baseline and no exception note exists, set status to `Blocked` and request tech lead clarification
 - if ticket asks direct external API call from domain layer (without provider abstraction), set status to `Blocked` and request provider-layer refactor acceptance first
 - API contract change-control is mandatory:
@@ -88,6 +95,9 @@ Rules:
     - reviewer-friendly visuals (screenshots, videos, traces, or report folder as applicable)
   - use a stable ticket slug so reviewers can inspect each ticket independently without relying on the app repo's transient `test-results/` directory
 - when moving a ticket to `Review`, add a ticket comment that includes the PR link and clearly states the ticket remains in `Review` until the PR is approved and merged
+- for frontend tickets, do not move to `Review` until both are true:
+  - verification is green (`typecheck`, `test`, `test:e2e`, and `build` when applicable)
+  - the current rendered page has been manually checked against the live design source and the reviewer-facing screenshot reflects the latest approved state
 - move a ticket to `Done` only after merge is confirmed and the final handoff comment includes the merged PR URL or merge commit reference
 - include links and summaries, not raw long logs
 
