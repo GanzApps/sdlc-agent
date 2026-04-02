@@ -27,18 +27,33 @@ Task rules:
 - keep tasks practical and hackathon-sized
 - prefer 8 to 15 tasks for MVP
 - group tasks by component when useful
+- group every task under a clear Story/Epic context
 - avoid over-splitting into tiny tasks
 - avoid vague tasks such as "work on backend"
 - each task should be independently understandable
 - align each task with impacted services and module boundaries from tech doc
 - define exactly which repository each ticket must be implemented in
+- enforce ticket title naming: `[DOMAIN][Story] <clear action>`
+  - DOMAIN values: `BE`, `FE`, `AI`, `INFRA`, `INTEGRATION`
+  - Story is mandatory and must be consistent for tickets in the same user flow (for example `Sign-In`)
+  - examples:
+    - `[BE][Sign-In] API Sign-in using Google`
+    - `[BE][Sign-In] API Sign-in using Slack`
+    - `[FE][Sign-In] FE Sign-In with Google mock`
+    - `[FE][Sign-In] FE Sign-In with Slack mock`
+- include explicit frontend/backend parallelization strategy:
+  - indicate whether FE can start with mock contract before BE is done
+  - create separate mock ticket when FE can proceed in parallel
 
 Each task should include:
 - Title
+- Story ID / Story Name
 - Description
 - Component
 - Priority
 - Target Repository (URL + branch/base branch guidance)
+- Impact Type (`FE`, `BE`, `FE+BE`, `Infra`, `Integration`)
+- FE Mock Strategy (`yes/no`) and mock source (`contract fixture`, `MSW`, etc.) when relevant
 - Inputs and Context (artifact links, API/doc references, constraints), including:
   - PRD link
   - Tech doc link
@@ -50,12 +65,17 @@ Each task should include:
 - Expected Output (code/runtime behavior, endpoint/schema/UI changes, logs/metrics impact)
 - Test Plan (unit/e2e scope and minimum evidence to attach)
 - Dependency or Notes if needed
+- Dependency fields:
+  - `depends_on` (ticket IDs this ticket requires)
+  - `blocked_by` (external blockers if any)
 
 Validation gate before marking ticket `Ready`:
 - all required fields above are non-empty
 - acceptance criteria are testable (pass/fail)
 - test plan mentions minimum unit/e2e evidence
 - stack baseline is explicit and consistent with default stack policy
+- story reference is present and title follows `[DOMAIN][Story] ...` format
+- FE/BE dependency and mock strategy are explicit for every FE/BE ticket
 - if any required field is missing, keep ticket out of `Ready` and complete it first
 
 Suggested components:
