@@ -62,6 +62,16 @@ Provider architecture requirements:
 - domain modules (auth/task/etc) must consume provider contracts via DI and module import, not instantiate vendor SDK/client directly
 - every ticket touching external APIs must state impacted provider module and expected contract changes
 
+Scheduler/cron design requirements:
+- when any module relies on periodic evaluation, retries, reminders, sync windows, or time-based actions, tech design must explicitly predict scheduler/cron needs
+- if cron/scheduler is required (or likely), always define a publicly reachable internal-trigger API protected by internal token header as fallback/manual trigger
+- minimum trigger contract that must be documented in Tech Design + API Contract Appendix:
+  - `POST /api/internal/<domain>/run` (trigger)
+  - `GET /api/internal/<domain>/run/:runId` (status)
+  - required header: `x-internal-ingest-token`
+  - deterministic error envelope for unauthorized/validation/in-progress/not-found
+- this internal-trigger API is mandatory even when dedicated cron service is planned but not yet available
+
 Sequence diagram placement requirements:
 - keep HLD sequence section concise and high-level (cross-service summary only)
 - put detailed visual sequence diagrams in module-level docs, not in HLD body
@@ -100,6 +110,7 @@ Rules:
 - do not propose Fastify/Express/custom BE framework for default implementation path
 - if an existing repo already uses another framework, mark as legacy exception and provide migration note
 - do not overload HLD with detailed per-module sequence diagrams
+- do not omit scheduler fallback trigger APIs for cron-dependent flows; if missing, mark design as incomplete and list required contract additions before execution
 
 Suggested output:
 - a concise technical summary
