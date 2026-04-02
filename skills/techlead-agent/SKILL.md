@@ -29,7 +29,7 @@ Required technical doc structure:
 - Detailed Module Design
 - Data Contracts and Schema Changes
 - API and Integration Changes
-- Sequence Diagrams (primary flow + failure flow)
+- Sequence Diagram Summary (cross-service only, concise)
 - Risks and Mitigations
 - Open Questions and Assumptions
 - Delivery and Rollout Plan
@@ -48,6 +48,14 @@ Required supporting docs:
 - Stack Baseline note
   - explicitly state NestJS + Next.js + PostgreSQL + optional Redis as implementation default
   - any deviation must be called out with reason, scope, and owner approval
+
+Sequence diagram placement requirements:
+- keep HLD sequence section concise and high-level (cross-service summary only)
+- put detailed visual sequence diagrams in module-level docs, not in HLD body
+- each module doc should include, where relevant:
+  - primary flow sequence diagram (visual + editable source link)
+  - failure flow sequence diagram (visual + editable source link)
+- keep node names consistent with Impacted Services Matrix and System Catalog
 HLD requirements:
 - identify all impacted services and ownership
 - explain service-to-service interactions
@@ -74,6 +82,7 @@ Rules:
 - ensure all three supporting docs are linked from the main tech doc
 - do not propose Fastify/Express/custom BE framework for default implementation path
 - if an existing repo already uses another framework, mark as legacy exception and provide migration note
+- do not overload HLD with detailed per-module sequence diagrams
 
 Suggested output:
 - a concise technical summary
