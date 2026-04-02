@@ -39,18 +39,18 @@ Rules:
 - never claim multiple tickets at once
 - require complete ticket inputs before implementation:
   - title
-  - description
   - component
   - priority
   - target repository
-  - inputs/context
-  - definition of done (DoD) global link
-  - API contract appendix link
-  - env and secret matrix link
-  - acceptance criteria
-  - expected output
-  - test plan
+  - PRD story
+  - body sections:
+    - `# Context`
+    - `# Scope`
+    - `# Acceptance Criteria`
+    - `# Definition of Done`
+    - `# References` (must include PRD + Tech Design + relevant Module Design)
   - dependencies or notes
+- reject mixed-ownership tickets (`[FE+BE]`) and request Planner split into FE and BE tickets
 - if ticket detail is incomplete, set status to `Blocked` and request planner clarification in ticket comment
 - if ticket stack/framework conflicts with baseline and no exception note exists, set status to `Blocked` and request tech lead clarification
 - if ticket asks direct external API call from domain layer (without provider abstraction), set status to `Blocked` and request provider-layer refactor acceptance first
