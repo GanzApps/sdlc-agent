@@ -1,7 +1,7 @@
 # SDLC Agent Runtime
 
 Codex-oriented SDLC workspace with:
-- role skills (`product`, `design`, `techlead`, `planner`, `engineer`)
+- role skills (`product`, `design`, `techlead`, `planner`, `engineer`, `incident-engineer`)
 - runtime scaffold for orchestration and worker execution
 - baseline reliability, observability, and test coverage
 - CI and deployment workflow templates
