@@ -35,6 +35,9 @@ Validation checklist:
    - response schema
    - error codes / error envelope
    - API Contract SSOT reference (page link/id)
+12. Contract change-control rules are enforceable:
+   - `INTEGRATION-FE` ticket includes pause instruction when API contract changes in-flight
+   - no contract-breaking change is allowed for tickets already in `Review` or `Done`; must create follow-up ticket
 
 Gate decision:
 - if all checks pass:
@@ -43,6 +46,7 @@ Gate decision:
   - set `Execution Status = Blocked`
   - keep `Status = Not started`
   - add explicit missing-items summary in ticket comment/body
+  - if failure is API contract drift against active `INTEGRATION-FE`, add `Contract Change Notice` comment and require FE pause until SSOT + ticket body are aligned
 
 Blocked message format:
 - `Quality Gate: Blocked`

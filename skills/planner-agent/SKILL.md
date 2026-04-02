@@ -87,6 +87,9 @@ Validation gate before marking ticket `Ready`:
 - ticket is single-owner (`FE` or `BE`), no mixed `[FE+BE]` domain
 - for `BE` and `INTEGRATION` tickets, `# API Contract` exists and is explicit (endpoint + request + response + errors)
 - for `INTEGRATION-FE` tickets, `# API Contract` exists and is explicit (consumed endpoint + request + response + errors + SSOT reference)
+- contract change-control readiness is explicit:
+  - each `INTEGRATION-FE` ticket references API Contract SSOT and includes a note to pause if contract changes mid-execution
+  - no planned contract-breaking change is scheduled against tickets already in `Review` or `Done`; such changes must be split into new follow-up tickets
 - if any required field is missing, keep ticket out of `Ready` and complete it first
 - run `ticket-quality-gate` skill before handoff to Engineer Agent
 

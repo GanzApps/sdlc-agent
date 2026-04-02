@@ -41,6 +41,7 @@ Ticket body format (required):
   - include explicit endpoint list for the ticket scope
   - each endpoint must include method/path, request shape, response shape, and error contract
   - for `INTEGRATION-FE`, include consumed endpoint contracts from backend SSOT and FE handling rules
+  - for `INTEGRATION-FE`, include pause rule: if contract changes while `In progress`, implementation must stop until SSOT + mapping are aligned
 
 References policy:
 - always include:
@@ -62,5 +63,7 @@ Before finalizing:
 2. verify each ticket has all required properties
 3. verify body contains all required sections
 4. for `BE`, `INTEGRATION`, and `INTEGRATION-FE` tickets, verify `# API Contract` is explicit and testable
-5. verify `# References` includes PRD + Tech Design + relevant Module Design
-6. run Ticket Quality Gate skill before handing off
+5. verify API Contract SSOT reference is present and matches current endpoint contract version
+6. verify no contract-breaking edits are planned for tickets already in `Review`/`Done`; create a new follow-up ticket instead
+7. verify `# References` includes PRD + Tech Design + relevant Module Design
+8. run Ticket Quality Gate skill before handing off

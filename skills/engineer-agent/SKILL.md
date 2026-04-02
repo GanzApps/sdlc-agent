@@ -72,10 +72,25 @@ Rules:
 - if ticket detail is incomplete, set status to `Blocked` and request planner clarification in ticket comment
 - if ticket stack/framework conflicts with baseline and no exception note exists, set status to `Blocked` and request tech lead clarification
 - if ticket asks direct external API call from domain layer (without provider abstraction), set status to `Blocked` and request provider-layer refactor acceptance first
+- API contract change-control is mandatory:
+  - if implementation changes API request/response/error contract from ticket body or API Contract SSOT, engineer must do all of these before continuing:
+    - update API Contract SSOT document first
+    - identify and notify all related `INTEGRATION-FE` tickets in Notion comment (include changed endpoint and impact)
+    - if any related `INTEGRATION-FE` ticket is `In progress`, immediately request pause by setting `Execution Status` to `Blocked` (or add explicit `STOP WORK` comment if blocked status is unavailable) until FE contract is aligned
+  - never introduce API contract changes when impacted ticket is already in `Review` or `Done`; instead open a new follow-up ticket for the contract version change
 - never mark `Done` without test evidence
 - when moving a ticket to `Review`, add a ticket comment that includes the PR link and clearly states the ticket remains in `Review` until the PR is approved and merged
 - move a ticket to `Done` only after merge is confirmed and the final handoff comment includes the merged PR URL or merge commit reference
 - include links and summaries, not raw long logs
+
+Required API change notification comment template:
+- when API contract changes and FE integration is impacted, add this comment to every impacted `INTEGRATION-FE` ticket:
+  - `Contract Change Notice`
+  - `- Changed endpoint(s): <method/path list>`
+  - `- Change type: <request|response|error envelope>`
+  - `- SSOT updated: <url/id>`
+  - `- Action: pause implementation and realign FE mapping/tests before resume.`
+  - `- Owner: Engineer Agent`
 
 Required evidence comment templates:
 - when setting ticket to `Review`, use this comment format:
