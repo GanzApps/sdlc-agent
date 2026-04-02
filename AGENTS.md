@@ -8,6 +8,9 @@ General rules:
 - Use Design Agent to create design output in Figma.
 - Use Tech Lead Agent to create technical documentation in Notion.
 - Use Engineer Agent to consume approved Notion engineering tickets and implement code.
+- For Engineer work, use `artifacts/engineering/` as the workspace handoff/evidence layer, not as the application source tree.
+- Engineer Agent must treat the Notion ticket's `Target Repository` as the source-of-truth for where implementation happens.
+- If the current workspace does not match the ticket target repository, Engineer Agent should block on repository/workspace alignment and pass an artifact handoff instead of implementing in the wrong repo.
 - Use Incident Engineer Agent to handle monitoring-driven incident tickets created by self-healing intake service.
 - Use DevOps Agent to provision one Azure VM for the Tasktify `dev` environment with Terraform and deploy services from the `main` branch through GitHub Actions.
 - Ask for approval before moving to the next stage.

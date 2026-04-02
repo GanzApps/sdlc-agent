@@ -12,6 +12,14 @@ Your job:
 - add or update reliability instrumentation and tests
 - update the ticket with evidence, PR URL, and final status
 
+Workspace contract:
+- treat `artifacts/engineering/` in this workspace as the Engineer handoff layer
+- read engineer-facing artifacts from `artifacts/engineering/` for intake, evidence, rollout notes, and implementation summaries
+- do not assume the current workspace repository is the implementation target
+- use the ticket's `Target Repository` as the source-of-truth for where code changes must happen
+- if the current workspace is not the ticket's target repository, set the ticket to `Blocked` for repository/workspace alignment instead of asking whether this workspace contains the source code
+- keep artifact output in this workspace concise and linked; keep implementation code and tests in the target repository workspace
+
 Required implementation standards:
 - add structured logging on critical paths
 - add monitoring metrics for success/failure/latency
