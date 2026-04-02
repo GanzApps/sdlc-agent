@@ -64,6 +64,13 @@ Each task should include:
   - `# Acceptance Criteria`
   - `# Definition of Done`
   - `# References` (must include PRD + Tech Design + relevant Module Design)
+  - `# API Contract` (required for `BE` and `INTEGRATION` tickets)
+    - list explicit endpoint contracts to be implemented in this ticket
+    - for each endpoint include:
+      - method + path
+      - request body/query/path fields
+      - response body shape
+      - expected error codes/envelopes
 
 Validation gate before marking ticket `Ready`:
 - all required fields above are non-empty
@@ -72,6 +79,7 @@ Validation gate before marking ticket `Ready`:
 - story reference is present and title follows `[DOMAIN][Story] ...` format
 - FE/BE dependency and mock strategy are explicit for every FE/BE ticket
 - ticket is single-owner (`FE` or `BE`), no mixed `[FE+BE]` domain
+- for `BE` and `INTEGRATION` tickets, `# API Contract` exists and is explicit (endpoint + request + response + errors)
 - if any required field is missing, keep ticket out of `Ready` and complete it first
 - run `ticket-quality-gate` skill before handoff to Engineer Agent
 

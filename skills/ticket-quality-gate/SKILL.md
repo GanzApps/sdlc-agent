@@ -29,6 +29,11 @@ Validation checklist:
    - relevant Module Design
 9. FE ticket has explicit `FE Mock Strategy`
 10. Dependencies in `depends_on` are explicit when needed
+11. For `BE` and `INTEGRATION` tickets, body includes `# API Contract` with explicit:
+   - endpoint method + path
+   - request schema (body/query/path)
+   - response schema
+   - error codes / error envelope
 
 Gate decision:
 - if all checks pass:

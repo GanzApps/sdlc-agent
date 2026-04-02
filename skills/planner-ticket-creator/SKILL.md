@@ -37,6 +37,9 @@ Ticket body format (required):
 - `# Acceptance Criteria`
 - `# Definition of Done`
 - `# References`
+- `# API Contract` (required for `BE` and `INTEGRATION` tickets)
+  - include explicit endpoint list for the ticket scope
+  - each endpoint must include method/path, request shape, response shape, and error contract
 
 References policy:
 - always include:
@@ -57,5 +60,6 @@ Before finalizing:
 1. verify no `[FE+BE]` title exists
 2. verify each ticket has all required properties
 3. verify body contains all required sections
-4. verify `# References` includes PRD + Tech Design + relevant Module Design
-5. run Ticket Quality Gate skill before handing off
+4. for `BE` and `INTEGRATION` tickets, verify `# API Contract` is explicit and testable
+5. verify `# References` includes PRD + Tech Design + relevant Module Design
+6. run Ticket Quality Gate skill before handing off
