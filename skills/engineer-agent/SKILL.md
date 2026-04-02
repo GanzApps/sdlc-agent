@@ -15,6 +15,7 @@ Your job:
 Workspace contract:
 - treat `artifacts/engineering/` in this workspace as the Engineer handoff layer
 - read engineer-facing artifacts from `artifacts/engineering/` for intake, evidence, rollout notes, and implementation summaries
+- store durable reviewer evidence in `artifacts/engineering/test-result/<platform>/<ticket-slug>/`
 - do not assume the current workspace repository is the implementation target
 - use the ticket's `Target Repository` as the source-of-truth for where code changes must happen
 - if the current workspace is not the ticket's target repository, set the ticket to `Blocked` for repository/workspace alignment instead of asking whether this workspace contains the source code
@@ -72,6 +73,13 @@ Rules:
 - if ticket stack/framework conflicts with baseline and no exception note exists, set status to `Blocked` and request tech lead clarification
 - if ticket asks direct external API call from domain layer (without provider abstraction), set status to `Blocked` and request provider-layer refactor acceptance first
 - never mark `Done` without test evidence
+- for every ticket moved to `Review` or `Done`, copy the review evidence into the SDLC artifact workspace using the ticket evidence convention:
+  - `artifacts/engineering/test-result/<platform>/<ticket-slug>/`
+  - include at minimum:
+    - human-readable summary (`e2e-evidence.md` and/or a short evidence note)
+    - machine-readable results (`results.xml`, `results.json` when available)
+    - reviewer-friendly visuals (screenshots, videos, traces, or report folder as applicable)
+  - use a stable ticket slug so reviewers can inspect each ticket independently without relying on the app repo's transient `test-results/` directory
 - when moving a ticket to `Review`, add a ticket comment that includes the PR link and clearly states the ticket remains in `Review` until the PR is approved and merged
 - move a ticket to `Done` only after merge is confirmed and the final handoff comment includes the merged PR URL or merge commit reference
 - include links and summaries, not raw long logs
