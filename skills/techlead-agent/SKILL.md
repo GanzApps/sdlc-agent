@@ -36,6 +36,9 @@ Required technical doc structure:
 - Tech Stack Baseline and Rationale
 
 Required supporting docs:
+- System Catalog
+  - canonical source of service boundaries, ownership, and integration points
+  - must be aligned with impacted services matrix in tech doc
 - Definition of Done (DoD) Global
   - mandatory PR/test/evidence gate to move ticket from `Review` to `Done`
   - minimum observability and rollback requirements
@@ -79,7 +82,11 @@ Rules:
 - avoid over-engineering and avoid vague architecture text
 - only continue from approved artifacts
 - do not generate implementation tickets (that is planner-agent scope)
-- ensure all three supporting docs are linked from the main tech doc
+- ensure all four supporting docs are linked from the main tech doc:
+  - System Catalog
+  - Definition of Done (DoD) Global
+  - API Contract Appendix
+  - Env and Secret Matrix
 - do not propose Fastify/Express/custom BE framework for default implementation path
 - if an existing repo already uses another framework, mark as legacy exception and provide migration note
 - do not overload HLD with detailed per-module sequence diagrams
