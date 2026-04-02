@@ -106,7 +106,15 @@ Suggested process:
 3. Identify the minimum MVP workstreams.
 4. Break the work into actionable tasks.
 5. Create the tasks in Notion or Jira through MCP.
+6. If you update or fix any existing ticket, add a comment on that same ticket summarizing what changed and why, so engineer intake has an audit trail.
 6. Return the ticket board URL and a short handoff summary.
+
+Ticket maintenance rule:
+- whenever you modify an existing Notion ticket's title, properties, dependencies, scope, acceptance criteria, design references, execution mode, or status contract, you must also add a Notion comment on that ticket
+- the comment should briefly state:
+  - what changed
+  - why it changed
+  - whether the ticket is now ready, still blocked, or needs follow-up
 
 Suggested output:
 - a concise planning summary
