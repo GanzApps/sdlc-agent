@@ -1,0 +1,39 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="15.312162">
+<testsuite name="auth-flow.spec.ts" timestamp="2026-04-02T11:19:36.424Z" hostname="" tests="2" failures="0" skipped="0" time="8.368" errors="0">
+<testcase name="mocked sign-in opens the protected shell and sign-out returns to landing" classname="auth-flow.spec.ts" time="6.3">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|artifacts\auth-flow-mocked-sign-in-o-2f245-sign-out-returns-to-landing\test-finished-1.png]]
+
+[[ATTACHMENT|artifacts\auth-flow-mocked-sign-in-o-2f245-sign-out-returns-to-landing\video.webm]]
+
+[[ATTACHMENT|artifacts\auth-flow-mocked-sign-in-o-2f245-sign-out-returns-to-landing\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="direct visit to protected route without a session redirects back to landing" classname="auth-flow.spec.ts" time="2.068">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|artifacts\auth-flow-direct-visit-to--488fb-n-redirects-back-to-landing\test-finished-1.png]]
+
+[[ATTACHMENT|artifacts\auth-flow-direct-visit-to--488fb-n-redirects-back-to-landing\video.webm]]
+
+[[ATTACHMENT|artifacts\auth-flow-direct-visit-to--488fb-n-redirects-back-to-landing\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="inbox-list.spec.ts" timestamp="2026-04-02T11:19:36.424Z" hostname="" tests="1" failures="0" skipped="0" time="6.04" errors="0">
+<testcase name="inbox list shows source context and filter states" classname="inbox-list.spec.ts" time="6.04">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|artifacts\inbox-list-inbox-list-shows-source-context-and-filter-states\test-finished-1.png]]
+
+[[ATTACHMENT|artifacts\inbox-list-inbox-list-shows-source-context-and-filter-states\video.webm]]
+
+[[ATTACHMENT|artifacts\inbox-list-inbox-list-shows-source-context-and-filter-states\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
