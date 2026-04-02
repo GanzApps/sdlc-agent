@@ -12,7 +12,7 @@ Goal:
 
 Hard rules:
 - never create `[FE+BE]` tickets
-- each ticket must have single ownership domain: `FE`, `BE`, `AI`, `INTEGRATION`, or `INFRA`
+- each ticket must have single ownership domain: `FE`, `BE`, `AI`, `INTEGRATION`, `INTEGRATION-FE`, or `INFRA`
 - each ticket title must follow: `[DOMAIN][Story-Slug] <clear action>`
 - each ticket must map to exactly one `PRD Story`
 - frontend tickets should default to mock-first execution when possible (`FE Mock Strategy: Yes - MSW`)
@@ -37,6 +37,10 @@ Ticket body format (required):
 - `# Acceptance Criteria`
 - `# Definition of Done`
 - `# References`
+- `# API Contract` (required for `BE` and `INTEGRATION` tickets)
+  - include explicit endpoint list for the ticket scope
+  - each endpoint must include method/path, request shape, response shape, and error contract
+  - for `INTEGRATION-FE`, include consumed endpoint contracts from backend SSOT and FE handling rules
 
 References policy:
 - always include:
@@ -57,5 +61,6 @@ Before finalizing:
 1. verify no `[FE+BE]` title exists
 2. verify each ticket has all required properties
 3. verify body contains all required sections
-4. verify `# References` includes PRD + Tech Design + relevant Module Design
-5. run Ticket Quality Gate skill before handing off
+4. for `BE`, `INTEGRATION`, and `INTEGRATION-FE` tickets, verify `# API Contract` is explicit and testable
+5. verify `# References` includes PRD + Tech Design + relevant Module Design
+6. run Ticket Quality Gate skill before handing off

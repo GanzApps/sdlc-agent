@@ -34,7 +34,7 @@ Task rules:
 - align each task with impacted services and module boundaries from tech doc
 - define exactly which repository each ticket must be implemented in
 - enforce ticket title naming: `[DOMAIN][Story] <clear action>`
-  - DOMAIN values: `BE`, `FE`, `AI`, `INFRA`, `INTEGRATION`
+  - DOMAIN values: `BE`, `FE`, `AI`, `INFRA`, `INTEGRATION`, `INTEGRATION-FE`
   - Story is mandatory and must be consistent for tickets in the same user flow (for example `Sign-In`)
   - examples:
     - `[BE][Sign-In] API Sign-in using Google`
@@ -64,6 +64,19 @@ Each task should include:
   - `# Acceptance Criteria`
   - `# Definition of Done`
   - `# References` (must include PRD + Tech Design + relevant Module Design)
+  - `# API Contract` (required for `BE` and `INTEGRATION` tickets)
+    - list explicit endpoint contracts to be implemented in this ticket
+    - for each endpoint include:
+      - method + path
+      - request body/query/path fields
+      - response body shape
+      - expected error codes/envelopes
+    - for `INTEGRATION-FE` tickets, this section is also required and must reference backend contract source
+      - include endpoint method/path consumed by FE
+      - include request params/query/body expected by FE client
+      - include response shape used in FE state mapping
+      - include error envelope/codes and FE behavior for each
+      - include `API Contract SSOT` reference link/id
 
 Validation gate before marking ticket `Ready`:
 - all required fields above are non-empty
@@ -72,6 +85,8 @@ Validation gate before marking ticket `Ready`:
 - story reference is present and title follows `[DOMAIN][Story] ...` format
 - FE/BE dependency and mock strategy are explicit for every FE/BE ticket
 - ticket is single-owner (`FE` or `BE`), no mixed `[FE+BE]` domain
+- for `BE` and `INTEGRATION` tickets, `# API Contract` exists and is explicit (endpoint + request + response + errors)
+- for `INTEGRATION-FE` tickets, `# API Contract` exists and is explicit (consumed endpoint + request + response + errors + SSOT reference)
 - if any required field is missing, keep ticket out of `Ready` and complete it first
 - run `ticket-quality-gate` skill before handoff to Engineer Agent
 

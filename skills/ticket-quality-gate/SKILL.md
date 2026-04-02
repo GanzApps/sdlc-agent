@@ -12,7 +12,7 @@ Goal:
 
 Validation checklist:
 1. Title format is valid: `[DOMAIN][Story-Slug] ...`
-2. DOMAIN is one of: `FE`, `BE`, `AI`, `INTEGRATION`, `INFRA`
+2. DOMAIN is one of: `FE`, `BE`, `AI`, `INTEGRATION`, `INTEGRATION-FE`, `INFRA`
 3. Title does not contain `[FE+BE]`
 4. `PRD Story` is set
 5. `Target Repository` is set
@@ -29,6 +29,12 @@ Validation checklist:
    - relevant Module Design
 9. FE ticket has explicit `FE Mock Strategy`
 10. Dependencies in `depends_on` are explicit when needed
+11. For `BE`, `INTEGRATION`, and `INTEGRATION-FE` tickets, body includes `# API Contract` with explicit:
+   - endpoint method + path
+   - request schema (body/query/path)
+   - response schema
+   - error codes / error envelope
+   - API Contract SSOT reference (page link/id)
 
 Gate decision:
 - if all checks pass:

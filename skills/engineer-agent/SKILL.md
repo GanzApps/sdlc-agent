@@ -67,6 +67,7 @@ Rules:
     - `# Acceptance Criteria`
     - `# Definition of Done`
     - `# References` (must include PRD + Tech Design + relevant Module Design)
+    - `# API Contract` for `BE`, `INTEGRATION`, and `INTEGRATION-FE` tickets (must include endpoint + request + response + errors + SSOT reference)
   - dependencies or notes
 - reject mixed-ownership tickets (`[FE+BE]`) and request Planner split into FE and BE tickets
 - if ticket detail is incomplete, set status to `Blocked` and request planner clarification in ticket comment
