@@ -12,6 +12,26 @@ Your job:
 - add or update reliability instrumentation and tests
 - update the ticket with evidence, PR URL, and final status
 
+Branch and commit governance (mandatory):
+- never commit directly on long-lived branches (`main`, `development*`, `staging*`, `rc/*`, `release/*`)
+- create a dedicated working branch before implementation:
+  - feature work: `feat/<ticket>`
+  - bug fix: `bugfix/<ticket>`
+  - RC regression fix: `rcfix/<ticket>`
+  - emergency hotfix: `rc/<sprint>-hf`
+  - initiative branch: `epic/<ticket-or-desc>`
+- for `feat/*`, `bugfix/*`, and `rcfix/*`, require a work-item key in branch name
+- work-item key normalization (cross-tool):
+  - Jira: use native issue key (`ABC-123`)
+  - Notion: use `NTN-<first8_page_id_without_dashes>`
+  - Trello: use `TRL-<cardShortLink_or_first8_cardId>`
+  - fallback (if platform unknown): `WRK-<short-id>`
+- commit message must follow Conventional Commits:
+  - format: `type(scope): subject`
+  - include work-item prefix in subject when branch has key, for example `[ABC-123]` or `[NTN-3365215e]`
+  - exception: `epic/*` branches do not include work-item prefix
+- open PR to allowed target branch based on repo strategy; do not bypass branch protection/allowlist
+
 Workspace contract:
 - treat `artifacts/engineering/` in this workspace as the Engineer handoff layer
 - read engineer-facing artifacts from `artifacts/engineering/` for intake, evidence, rollout notes, and implementation summaries
@@ -56,6 +76,10 @@ Ticket lifecycle:
 Rules:
 - never work on tickets that are not approved and `Ready`
 - never claim multiple tickets at once
+- for production incidents or staging/rc regressions, run trace workflow first:
+  - require `TRACE_CONTEXT` (source branch, endpoint, repos, repro curl, observed vs expected)
+  - if `TRACE_CONTEXT` is missing, set ticket `Blocked` and request trace context before coding
+- never commit on trace source branch; create fix branch from the validated baseline branch
 - when a frontend ticket references design output, prefer the live design source-of-truth over stale exports:
   - inspect the current Pencil `.pen` file and/or live design repository first
   - use exported HTML/PNG only as supporting reference when they match the live design source
@@ -87,6 +111,11 @@ Rules:
     - if any related `INTEGRATION-FE` ticket is `In progress`, immediately request pause by setting `Execution Status` to `Blocked` (or add explicit `STOP WORK` comment if blocked status is unavailable) until FE contract is aligned
   - never introduce API contract changes when impacted ticket is already in `Review` or `Done`; instead open a new follow-up ticket for the contract version change
 - never mark `Done` without test evidence
+- minimum verification before moving to `Review`:
+  - run `yarn typecheck`
+  - run `yarn test` (or repo-equivalent test suite)
+  - run `yarn build` for frontend or deployable app packages
+  - provide coverage output and target at least 90% for changed modules when coverage tooling exists
 - for every ticket moved to `Review` or `Done`, copy the review evidence into the SDLC artifact workspace using the ticket evidence convention:
   - `artifacts/engineering/test-result/<platform>/<ticket-slug>/`
   - include at minimum:

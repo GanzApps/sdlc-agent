@@ -16,26 +16,30 @@ Validation checklist:
 3. Title does not contain `[FE+BE]`
 4. `PRD Story` is set
 5. `Target Repository` is set
-6. `Priority`, `Status`, and `Execution Status` are set
-7. Ticket body includes sections:
+6. `Base Branch` is set
+7. `Priority`, `Status`, and `Execution Status` are set
+8. Work-item key is explicit and normalized in ticket body (`# Branch and PR Plan`)
+9. Working branch pattern and PR target are explicit in ticket body (`# Branch and PR Plan`)
+10. Ticket body includes sections:
    - `# Context`
    - `# Scope`
+   - `# Branch and PR Plan`
    - `# Acceptance Criteria`
    - `# Definition of Done`
    - `# References`
-8. `# References` includes at minimum:
+11. `# References` includes at minimum:
    - PRD
    - Tech Design
    - relevant Module Design
-9. FE ticket has explicit `FE Mock Strategy`
-10. Dependencies in `depends_on` are explicit when needed
-11. For `BE`, `INTEGRATION`, and `INTEGRATION-FE` tickets, body includes `# API Contract` with explicit:
+12. FE ticket has explicit `FE Mock Strategy`
+13. Dependencies in `depends_on` are explicit when needed
+14. For `BE`, `INTEGRATION`, and `INTEGRATION-FE` tickets, body includes `# API Contract` with explicit:
    - endpoint method + path
    - request schema (body/query/path)
    - response schema
    - error codes / error envelope
    - API Contract SSOT reference (page link/id)
-12. Contract change-control rules are enforceable:
+15. Contract change-control rules are enforceable:
    - `INTEGRATION-FE` ticket includes pause instruction when API contract changes in-flight
    - no contract-breaking change is allowed for tickets already in `Review` or `Done`; must create follow-up ticket
 
@@ -59,3 +63,6 @@ Operational rules:
 - do not rewrite implementation scope unless asked; focus on contract validity
 - do not approve tickets with vague AC or missing references
 - for FE tickets, prefer mock-first readiness when backend dependency is avoidable
+- enforce branch governance readiness:
+  - reject tickets that imply direct work on `main`/`release` without explicit exception
+  - require working branch examples with normalized work-item key for `feat/bugfix/rcfix` flows

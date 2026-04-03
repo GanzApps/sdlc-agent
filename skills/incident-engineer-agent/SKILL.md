@@ -12,6 +12,31 @@ Your job:
 - implement the fix in the target repository and open a GitHub PR
 - update ticket evidence and move status to `Review` or `Done`
 
+Trace-first requirement (non-negotiable):
+- before writing fix code, produce `TRACE_CONTEXT` with:
+  - `TRACE_SOURCE_BRANCH`
+  - `ENTRY_ENDPOINT`
+  - `ENTRY_SERVICE`
+  - `REPOS`
+  - `SUSPECTED_CODE_PATH`
+  - `REPRO_CURL`
+  - `OBSERVED_BEHAVIOR`
+  - `EXPECTED_BEHAVIOR`
+- if any field is missing, set ticket to `Blocked` and request missing trace input
+- never commit directly on `TRACE_SOURCE_BRANCH`
+
+Autonomous mode adaptation:
+- support two trace levels:
+  - `TRACE_CONTEXT_FULL` for prod/P0/P1 incidents (all fields mandatory)
+  - `TRACE_CONTEXT_LITE` for lower-severity incidents:
+    - TRACE_SOURCE_BRANCH
+    - ENTRY_ENDPOINT or ENTRY_SERVICE
+    - REPOS
+    - OBSERVED_BEHAVIOR
+    - EXPECTED_BEHAVIOR
+    - evidence link (logs/APM/alert URL)
+- if LITE is available but FULL is missing, set interim status/comment `Needs Trace Enrichment` and trigger enrichment workflow; do not mark final `Blocked` immediately
+
 Required incident ticket fields:
 - title
 - description
@@ -38,14 +63,29 @@ Implementation standards:
 - add self-healing controls (retry/backoff, idempotent handling, timeout/circuit guard where relevant)
 - add unit tests for root cause fix
 - add integration/e2e check for incident scenario when feasible
+- keep fix minimal and reversible; prefer smallest safe diff
+
+Branch and commit policy:
+- branch type selection:
+  - production/staging bug fix: `bugfix/<ticket>`
+  - RC regression: `rcfix/<ticket>`
+  - emergency release patch: `rc/<sprint>-hf`
+- require work-item key for `bugfix/*` and `rcfix/*`
+- work-item key normalization (cross-tool):
+  - Jira: `ABC-123`
+  - Notion: `NTN-<first8_page_id_without_dashes>`
+  - Trello: `TRL-<cardShortLink_or_first8_cardId>`
+  - fallback: `WRK-<short-id>`
+- commit convention: `type(scope): [WORK-KEY] subject` (except `epic/*`)
 
 Execution flow:
 1. Read ticket and extract alert context (dashboard, runbook, timestamps, affected component).
-2. Reproduce issue quickly (local/staging/log replay depending on ticket context).
-3. Implement minimal safe fix first.
-4. Add observability and regression tests.
-5. Push branch and create PR to target repo.
-6. Update incident ticket with:
+2. Produce and validate `TRACE_CONTEXT` against the incident report.
+3. Reproduce issue quickly (local/staging/log replay depending on ticket context).
+4. Implement minimal safe fix on dedicated fix branch.
+5. Add observability and regression tests.
+6. Push branch and create PR to target repo.
+7. Update incident ticket with:
    - root cause summary
    - changed files/modules
    - test evidence

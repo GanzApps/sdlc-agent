@@ -52,6 +52,9 @@ Each task should include:
 - Component
 - Priority
 - Target Repository (URL + branch/base branch guidance)
+- Work Item Key (cross-tool key used in branch name and commit prefix)
+- Working Branch Pattern (for engineer execution, for example `feat/ABC-123` or `bugfix/ABC-123`)
+- PR Target Branch (allowed merge target)
 - Impact Type (`FE`, `BE`, `Infra`, `Integration`, `AI`)
 - FE Mock Strategy (`yes/no`) and mock source (`contract fixture`, `MSW`, etc.) when relevant
 - Dependency or Notes if needed
@@ -61,6 +64,7 @@ Each task should include:
 - Body sections (in ticket content/RTF, not as extra DB fields):
   - `# Context`
   - `# Scope`
+  - `# Branch and PR Plan`
   - `# Acceptance Criteria`
   - `# Definition of Done`
   - `# References` (must include PRD + Tech Design + relevant Module Design)
@@ -84,6 +88,12 @@ Validation gate before marking ticket `Ready`:
 - stack baseline is explicit and consistent with default stack policy
 - story reference is present and title follows `[DOMAIN][Story] ...` format
 - FE/BE dependency and mock strategy are explicit for every FE/BE ticket
+- branch strategy is explicit and actionable:
+  - base branch is present and valid for the target repo flow
+  - work item key is present and normalized:
+    - Jira `ABC-123`, Notion `NTN-<8>`, Trello `TRL-<shortLink>`
+  - working branch pattern is present (`feat/*`, `bugfix/*`, `rcfix/*`, `epic/*`, `rc/<sprint>-hf`)
+  - PR target branch is stated and allowed by repository branching policy
 - ticket is single-owner (`FE` or `BE`), no mixed `[FE+BE]` domain
 - for `BE` and `INTEGRATION` tickets, `# API Contract` exists and is explicit (endpoint + request + response + errors)
 - for `INTEGRATION-FE` tickets, `# API Contract` exists and is explicit (consumed endpoint + request + response + errors + SSOT reference)

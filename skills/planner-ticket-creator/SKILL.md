@@ -34,6 +34,7 @@ Ticket properties to set:
 Ticket body format (required):
 - `# Context`
 - `# Scope`
+- `# Branch and PR Plan`
 - `# Acceptance Criteria`
 - `# Definition of Done`
 - `# References`
@@ -67,3 +68,7 @@ Before finalizing:
 6. verify no contract-breaking edits are planned for tickets already in `Review`/`Done`; create a new follow-up ticket instead
 7. verify `# References` includes PRD + Tech Design + relevant Module Design
 8. run Ticket Quality Gate skill before handing off
+9. verify branch plan is explicit:
+   - work-item key is explicit and normalized (Jira `ABC-123`, Notion `NTN-<8>`, Trello `TRL-<shortLink>`)
+   - working branch pattern exists (`feat/*`, `bugfix/*`, `rcfix/*`, `epic/*`, or `rc/<sprint>-hf`)
+   - PR target branch is explicitly stated and valid for current release flow

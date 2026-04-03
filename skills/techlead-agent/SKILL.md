@@ -29,6 +29,7 @@ Required technical doc structure:
 - Detailed Module Design
 - Data Contracts and Schema Changes
 - API and Integration Changes
+- Branching and Release Compatibility Notes
 - Sequence Diagram Summary (cross-service only, concise)
 - Risks and Mitigations
 - Open Questions and Assumptions
@@ -111,6 +112,10 @@ Rules:
 - if an existing repo already uses another framework, mark as legacy exception and provide migration note
 - do not overload HLD with detailed per-module sequence diagrams
 - do not omit scheduler fallback trigger APIs for cron-dependent flows; if missing, mark design as incomplete and list required contract additions before execution
+- include branch/release assumptions for implementation handoff:
+  - default execution base branch per repo (`main` or `development*`) must be stated
+  - if RC or hotfix path is expected, mention `rcfix/*` or `rc/<sprint>-hf` strategy explicitly
+  - highlight any mismatch risk between ticket base branch and release promotion path
 
 Suggested output:
 - a concise technical summary
