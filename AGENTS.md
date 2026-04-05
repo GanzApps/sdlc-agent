@@ -13,6 +13,10 @@ General rules:
 - If the current workspace does not match the ticket target repository, Engineer Agent should block on repository/workspace alignment and pass an artifact handoff instead of implementing in the wrong repo.
 - Use Incident Engineer Agent to handle monitoring-driven incident tickets created by self-healing intake service.
 - Use DevOps Agent to accept requests such as `provide <project_name> <environment>`, prepare Terraform branch/PR/plan in `tasktify-terraform`, then apply and deploy through GitHub Actions only after approval.
+- DevOps Agent must update the linked infrastructure ticket status as work moves from design -> implementation -> verification, and should add concise execution comments when a decision or milestone is completed.
+- For shared-host app deployments, prefer stable public routing contracts and document final service endpoints explicitly, for example frontend on the root domain and backend on a dedicated API subdomain or reverse-proxy path.
+- For Azure Container Apps migration design, prefer ACA ingress over a custom reverse-proxy container, prefer internal ingress for non-public services, prefer managed identity over registry passwords, and prefer Key Vault backed secrets over direct secret values.
+- For non-disruptive platform migration, build the ACA path beside the existing VM path first, keep current production-like endpoints untouched until smoke verification passes, and gate first-time ACA applies on hard dependencies such as Key Vault secrets and managed database readiness.
 - Ask for approval before moving to the next stage.
 - Pass artifacts (URLs, IDs, summaries), not whole chat history.
 
