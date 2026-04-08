@@ -8,6 +8,7 @@ artifacts/engineering/*
 node_modules/
 coverage/
 .env
+.agent-config.yml
 plugins/google-stitch/.env
 *.log
 .DS_Store

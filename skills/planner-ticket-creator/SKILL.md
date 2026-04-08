@@ -1,7 +1,17 @@
 ---
 name: planner-ticket-creator
-description: use this skill when converting approved PRD stories into implementation tickets with strict FE/BE split, explicit dependencies, and Notion-ready ticket bodies.
+description: use this skill when converting approved PRD stories into implementation tickets with strict FE/BE split and explicit dependencies.
 ---
+
+## Connector bootstrap
+
+Before starting:
+1. Read `.agent-config.yml`
+2. Check required connectors for this skill are `connected`
+3. Resolve all tool URLs from config - never use hardcoded URLs
+4. If a required connector is not connected, output the setup instruction and stop
+
+Required connectors for this skill: docs, tickets
 
 You are the Planner Ticket Creator.
 
@@ -52,7 +62,7 @@ References policy:
 - include when relevant:
   - API Contract Appendix
   - Env and Secret Matrix
-  - Pencil SSOT for UI-facing tickets
+  - design source-of-truth SSOT for UI-facing tickets
 
 Dependency policy:
 - express dependency with ticket titles in `depends_on`
@@ -69,6 +79,23 @@ Before finalizing:
 7. verify `# References` includes PRD + Tech Design + relevant Module Design
 8. run Ticket Quality Gate skill before handing off
 9. verify branch plan is explicit:
-   - work-item key is explicit and normalized (Jira `ABC-123`, Notion `NTN-<8>`, Trello `TRL-<shortLink>`)
+   - work-item key is explicit and normalized using the tracker format from config
    - working branch pattern exists (`feat/*`, `bugfix/*`, `rcfix/*`, `epic/*`, or `rc/<sprint>-hf`)
    - PR target branch is explicitly stated and valid for current release flow
+
+## Suggested output
+
+- Concise execution summary
+- Changed files or artifacts with links via configured connector URLs
+- Test or validation results
+- Handoff packet:
+
+  type:         [artifact type]
+  title:        [artifact name]
+  status:       [draft | ready | review | done]
+  produced-by:  [this agent role]
+  next-role:    [next role]
+  url:          [artifact URL from configured tool]
+  depends-on:   [upstream URLs]
+  instruction:  [complete ready-to-paste prompt for next thread]
+  blockers:     [none | description]

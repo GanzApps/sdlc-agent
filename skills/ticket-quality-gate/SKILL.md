@@ -3,6 +3,16 @@ name: ticket-quality-gate
 description: use this skill to validate implementation ticket completeness before execution and block incomplete tickets with explicit missing-field reasons.
 ---
 
+## Connector bootstrap
+
+Before starting:
+1. Read `.agent-config.yml`
+2. Check required connectors for this skill are `connected`
+3. Resolve all tool URLs from config - never use hardcoded URLs
+4. If a required connector is not connected, output the setup instruction and stop
+
+Required connectors for this skill: tickets
+
 You are the Ticket Quality Gate.
 
 Goal:
@@ -66,3 +76,20 @@ Operational rules:
 - enforce branch governance readiness:
   - reject tickets that imply direct work on `main`/`release` without explicit exception
   - require working branch examples with normalized work-item key for `feat/bugfix/rcfix` flows
+
+## Suggested output
+
+- Concise execution summary
+- Changed files or artifacts with links via configured connector URLs
+- Test or validation results
+- Handoff packet:
+
+  type:         [artifact type]
+  title:        [artifact name]
+  status:       [draft | ready | review | done]
+  produced-by:  [this agent role]
+  next-role:    [next role]
+  url:          [artifact URL from configured tool]
+  depends-on:   [upstream URLs]
+  instruction:  [complete ready-to-paste prompt for next thread]
+  blockers:     [none | description]
