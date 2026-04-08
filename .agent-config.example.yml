@@ -1,0 +1,56 @@
+version: "1.0"
+
+workspace:
+  name: "Your Company"
+  project: "Your Project"
+
+connectors:
+  docs:
+    # Supported: outline | notion | confluence | gitlab-wiki
+    tool: outline
+    url: ""
+    mcp_url: ""
+    api_key: "${OUTLINE_API_KEY}"
+    status: not-configured
+
+  tickets:
+    # Supported: plane | jira | linear | gitlab-issues | github-issues
+    tool: plane
+    url: ""
+    mcp_url: "stdio"
+    mcp_command: "uvx plane-mcp-server stdio"
+    api_key: "${PLANE_API_KEY}"
+    workspace_slug: "${PLANE_WORKSPACE_SLUG}"
+    base_url: ""
+    status: not-configured
+
+  code:
+    # Supported: gitlab | github | bitbucket
+    tool: gitlab
+    url: ""
+    mcp_url: ""
+    default_branch: "main"
+    skills_repo: ""
+    status: not-configured
+
+  design:
+    # Supported: penpot | figma | pencil
+    tool: penpot
+    url: ""
+    mcp_url: "http://localhost:4401/mcp"
+    status: not-configured
+
+executor:
+  primary:
+    tool: claude-code
+    model: claude-sonnet-4-6
+  fallback:
+    tool: gemini-cli
+    model: gemini-2.5-flash
+  zero_cost:
+    tool: opencode
+    model: "deepseek/deepseek-chat"
+
+handoff:
+  store: docs
+  folder: "AI-SDLC / Handoffs"

@@ -1,13 +1,10 @@
 artifacts/
-!artifacts/
 artifacts/*
-!artifacts/engineering/
 artifacts/engineering/*
-!artifacts/engineering/test-result/
-!artifacts/engineering/test-result/**
 node_modules/
 coverage/
 .env
+.agent-config.yml
 plugins/google-stitch/.env
 *.log
 .DS_Store
