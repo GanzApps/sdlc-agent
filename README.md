@@ -31,11 +31,10 @@ The handoff packet format is defined in `AGENTS.md` and included in every skillâ
 1. Product Agent produces the PRD.
 2. Design Agent creates design output.
 3. Tech Lead Agent writes the technical design.
-4. Planner Agent creates implementation tickets.
-5. Ticket Quality Gate validates ticket readiness.
-6. Engineer Agent executes `Ready` tickets.
-7. Incident Engineer Agent handles incident tickets.
-8. DevOps Agent handles infrastructure requests.
+4. Planner Agent creates and validates implementation tickets.
+5. Engineer Agent executes `Ready` tickets.
+6. Incident Engineer Agent handles incident tickets.
+7. DevOps Agent handles infrastructure requests.
 
 ## Updating skills
 

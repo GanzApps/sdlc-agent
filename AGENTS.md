@@ -25,11 +25,10 @@ Workflow:
 2. Design Agent reads the approved PRD and creates design output in the design tool (design connector).
 3. Tech Lead Agent reads the PRD and design output, then writes HLD + impacted services + module details + sequence diagrams in the documentation tool (docs connector).
 4. Planner Agent breaks work into engineering tickets in the ticket tool (tickets connector) or the configured tracker with strict FE/BE split and complete ticket body sections.
-5. Planner Ticket Creator skill is used to create or refresh tickets from approved PRD and technical docs.
-6. Ticket Quality Gate skill validates ticket contract and blocks incomplete tickets before execution.
-7. Engineer Agent consumes `Ready` tickets and moves them through `In Progress` -> `Review` -> `Done` (or `Blocked` if ticket contract is incomplete).
-8. Incident Engineer Agent consumes monitoring incident tickets from the documentation tool and delivers fix PRs with evidence back to the ticket tool.
-9. DevOps Agent accepts an infrastructure request such as `provide tasktify staging`, prepares the Terraform branch/PR/plan in the infrastructure repository, waits for approval, then applies the target environment and verifies deployment health.
+5. Planner Agent creates or refreshes tickets from approved PRD and technical docs and runs the ticket quality gate before handoff.
+6. Engineer Agent consumes `Ready` tickets and moves them through `In Progress` -> `Review` -> `Done` (or `Blocked` if ticket contract is incomplete).
+7. Incident Engineer Agent consumes monitoring incident tickets from the documentation tool and delivers fix PRs with evidence back to the ticket tool.
+8. DevOps Agent accepts an infrastructure request such as `provide tasktify staging`, prepares the Terraform branch/PR/plan in the infrastructure repository, waits for approval, then applies the target environment and verifies deployment health.
 
 ## Configuration
 

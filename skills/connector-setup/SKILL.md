@@ -57,7 +57,7 @@ Setup steps:
 
 ### tickets: plane
 
-Required for: planner-agent, planner-ticket-creator, ticket-quality-gate, engineer-agent, incident-engineer-agent, devops-agent
+Required for: planner-agent, engineer-agent, incident-engineer-agent, devops-agent
 
 Setup steps:
 1. Create or select the workspace and project for ticket tracking.
@@ -67,7 +67,7 @@ Setup steps:
 
 ### tickets: jira
 
-Required for: planner-agent, planner-ticket-creator, ticket-quality-gate, engineer-agent, incident-engineer-agent, devops-agent
+Required for: planner-agent, engineer-agent, incident-engineer-agent, devops-agent
 
 Setup steps:
 1. Create or select the project and confirm issue create/edit permissions.
@@ -77,7 +77,7 @@ Setup steps:
 
 ### tickets: linear
 
-Required for: planner-agent, planner-ticket-creator, ticket-quality-gate, engineer-agent, incident-engineer-agent, devops-agent
+Required for: planner-agent, engineer-agent, incident-engineer-agent, devops-agent
 
 Setup steps:
 1. Create or select the team and project for issue tracking.
@@ -87,7 +87,7 @@ Setup steps:
 
 ### tickets: gitlab-issues
 
-Required for: planner-agent, planner-ticket-creator, ticket-quality-gate, engineer-agent, incident-engineer-agent, devops-agent
+Required for: planner-agent, engineer-agent, incident-engineer-agent, devops-agent
 
 Setup steps:
 1. Select the repository and confirm issue access.
@@ -97,7 +97,7 @@ Setup steps:
 
 ### tickets: github-issues
 
-Required for: planner-agent, planner-ticket-creator, ticket-quality-gate, engineer-agent, incident-engineer-agent, devops-agent
+Required for: planner-agent, engineer-agent, incident-engineer-agent, devops-agent
 
 Setup steps:
 1. Select the repository and confirm issue access.

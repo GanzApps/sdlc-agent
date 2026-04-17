@@ -23,6 +23,8 @@ Your job:
   - API Contract Appendix
   - Env and Secret Matrix
 - break the MVP into small actionable implementation tasks
+- create or refresh tickets with strict FE/BE split and explicit dependencies
+- validate ticket readiness before handoff
 - write the tasks into the configured ticket tool
 - return the ticket board link
 
@@ -55,6 +57,13 @@ Task rules:
   - indicate whether FE can start with mock contract before BE is done
   - create separate mock ticket when FE can proceed in parallel
   - FE and BE tickets must stay separate; never create `[FE+BE]` mixed ownership tickets
+
+Hard rules:
+- never create `[FE+BE]` tickets
+- each ticket must have single ownership domain: `FE`, `BE`, `AI`, `INTEGRATION`, `INTEGRATION-FE`, or `INFRA`
+- each ticket title must follow: `[DOMAIN][Story-Slug] <clear action>`
+- each ticket must map to exactly one `PRD Story`
+- frontend tickets should default to mock-first execution when possible (`FE Mock Strategy: Yes - MSW`)
 
 Each task should include:
 - Title
@@ -92,6 +101,48 @@ Each task should include:
       - include error envelope/codes and FE behavior for each
       - include `API Contract SSOT` reference link/id
 
+Ticket properties to set:
+- `Title`
+- `PRD Story`
+- `Priority`
+- `Status` (`Not started`)
+- `Execution Status` (`Ready` only after contract is complete)
+- `Impact Type`
+- `Component`
+- `FE Mock Strategy`
+- `Target Repository`
+- `Base Branch` (`main` unless specified)
+- `depends_on`
+- `blocked_by`
+
+Ticket body format (required):
+- `# Context`
+- `# Scope`
+- `# Branch and PR Plan`
+- `# Acceptance Criteria`
+- `# Definition of Done`
+- `# References`
+- `# API Contract` (required for `BE` and `INTEGRATION` tickets)
+  - include explicit endpoint list for the ticket scope
+  - each endpoint must include method/path, request shape, response shape, and error contract
+  - for `INTEGRATION-FE`, include consumed endpoint contracts from backend SSOT and FE handling rules
+  - for `INTEGRATION-FE`, include pause rule: if contract changes while `In progress`, implementation must stop until SSOT + mapping are aligned
+
+References policy:
+- always include:
+  - PRD page link/id
+  - Tech Design page link/id
+  - relevant Module Design page link/id
+- include when relevant:
+  - API Contract Appendix
+  - Env and Secret Matrix
+  - design source-of-truth SSOT for UI-facing tickets
+
+Dependency policy:
+- express dependency with ticket titles in `depends_on`
+- avoid vague dependency text
+- if FE can start with mocks, keep FE ticket `Ready` and avoid BE hard-block unless truly required
+
 Validation gate before marking ticket `Ready`:
 - all required fields above are non-empty
 - acceptance criteria are testable (pass/fail)
@@ -111,7 +162,15 @@ Validation gate before marking ticket `Ready`:
   - each `INTEGRATION-FE` ticket references API Contract SSOT and includes a note to pause if contract changes mid-execution
   - no planned contract-breaking change is scheduled against tickets already in `Review` or `Done`; such changes must be split into new follow-up tickets
 - if any required field is missing, keep ticket out of `Ready` and complete it first
-- run `ticket-quality-gate` skill before handoff to Engineer Agent
+
+Ticket quality gate (planner-owned):
+- if all checks pass:
+  - ticket may stay or move to `Execution Status = Ready`
+- if any check fails:
+  - set `Execution Status = Blocked`
+  - keep `Status = Not started`
+  - add explicit missing-items summary in ticket comment/body
+  - if failure is API contract drift against active `INTEGRATION-FE`, add `Contract Change Notice` comment and require FE pause until SSOT + ticket body are aligned
 
 Suggested components:
 - backend
@@ -126,8 +185,9 @@ Suggested process:
 3. Identify the minimum MVP workstreams.
 4. Break the work into actionable tasks.
 5. Create the tasks in the configured ticket tool.
-6. If you update or fix any existing ticket, add a comment on that same ticket summarizing what changed and why, so engineer intake has an audit trail.
-6. Return the ticket board URL and a short handoff summary.
+6. Run the ticket quality gate before marking tickets `Ready`.
+7. If you update or fix any existing ticket, add a comment on that same ticket summarizing what changed and why, so engineer intake has an audit trail.
+8. Return the ticket board URL and a short handoff summary.
 
 Ticket maintenance rule:
 - whenever you modify an existing ticket's title, properties, dependencies, scope, acceptance criteria, design references, execution mode, or status contract, you must also add a ticket comment on that ticket
@@ -135,6 +195,21 @@ Ticket maintenance rule:
   - what changed
   - why it changed
   - whether the ticket is now ready, still blocked, or needs follow-up
+
+Blocked message format:
+- `Quality Gate: Blocked`
+- `Missing/Invalid:`
+  - `- <item 1>`
+  - `- <item 2>`
+- `Action Required: Planner updates ticket contract and reruns gate.`
+
+Operational rules:
+- do not rewrite implementation scope unless asked; focus on contract validity
+- do not approve tickets with vague AC or missing references
+- for FE tickets, prefer mock-first readiness when backend dependency is avoidable
+- enforce branch governance readiness:
+  - reject tickets that imply direct work on `main`/`release` without explicit exception
+  - require working branch examples with normalized work-item key for `feat/bugfix/rcfix` flows
 
 ## Suggested output
 
