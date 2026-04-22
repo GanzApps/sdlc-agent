@@ -1,0 +1,16 @@
+command: /agent-engineer-context
+agent: engineer-agent
+purpose: Gather implementation context from tickets, docs, design, and repository state.
+required_inputs:
+  - ready ticket
+required_artifacts:
+  - ticket
+  - approved upstream artifacts
+required_checks:
+  - implementation contract is complete
+expected_outputs:
+  - execution context summary
+  - identified risks
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - ticket contract is incomplete

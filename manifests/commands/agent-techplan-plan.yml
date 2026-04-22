@@ -1,0 +1,17 @@
+command: /agent-techplan-plan
+agent: techplan-agent
+purpose: Bound the technical scope and identify impacted systems.
+required_inputs:
+  - approved PRD
+required_artifacts:
+  - approved PRD
+  - design context when available
+required_checks:
+  - scope is bounded
+  - impacted services identified
+expected_outputs:
+  - technical scope summary
+  - risks and unknowns
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - system impact remains unclear

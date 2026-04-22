@@ -1,0 +1,14 @@
+command: /agent-planner-slice
+agent: planner-agent
+purpose: Break approved work into ticket-sized slices.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+  - approved technical design
+required_checks:
+  - slices map cleanly to stories and repositories
+expected_outputs:
+  - ticket slice set
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - work cannot be sliced without missing upstream detail

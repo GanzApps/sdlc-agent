@@ -17,7 +17,7 @@ Required connectors for this skill: none
 
 ### docs: outline
 
-Required for: product-agent, techlead-agent
+Required for: product-agent, techplan-agent
 
 Setup steps:
 1. Create or select the workspace and repository-level documentation space in the service.
@@ -27,7 +27,7 @@ Setup steps:
 
 ### docs: notion
 
-Required for: product-agent, techlead-agent
+Required for: product-agent, techplan-agent
 
 Setup steps:
 1. Create or select the documentation workspace and relevant pages or databases.
@@ -37,7 +37,7 @@ Setup steps:
 
 ### docs: confluence
 
-Required for: product-agent, techlead-agent
+Required for: product-agent, techplan-agent
 
 Setup steps:
 1. Connect the documentation space and confirm the target site is reachable.
@@ -47,7 +47,7 @@ Setup steps:
 
 ### docs: gitlab-wiki
 
-Required for: product-agent, techlead-agent
+Required for: product-agent, techplan-agent
 
 Setup steps:
 1. Connect the documentation repository wiki and confirm write access.

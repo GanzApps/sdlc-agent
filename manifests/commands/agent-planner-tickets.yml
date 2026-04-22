@@ -1,0 +1,17 @@
+command: /agent-planner-tickets
+agent: planner-agent
+purpose: Create or refresh execution-ready tickets and run the quality gate.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+  - approved technical design
+required_checks:
+  - ticket bodies are contract-complete
+  - target repository is explicit
+  - ticket quality gate passes
+expected_outputs:
+  - ticket set URL
+  - handoff packet
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - any ticket fails the planner quality gate

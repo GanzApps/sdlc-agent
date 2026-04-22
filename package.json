@@ -1,0 +1,8 @@
+{
+  "name": "ai-sdlc",
+  "version": "0.1.0",
+  "private": true,
+  "bin": {
+    "ai-sdlc": "./bin/ai-sdlc.js"
+  }
+}

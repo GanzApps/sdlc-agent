@@ -1,0 +1,15 @@
+command: /agent-design-init
+agent: design-agent
+purpose: Verify design readiness and required upstream artifacts.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+required_checks:
+  - docs connector connected
+  - design connector connected
+expected_outputs:
+  - readiness result
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - approved PRD is missing
+  - design connector is not connected

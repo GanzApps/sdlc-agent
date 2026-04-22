@@ -1,0 +1,14 @@
+command: /agent-techplan-init
+agent: techplan-agent
+purpose: Verify technical design readiness and upstream artifact availability.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+required_checks:
+  - docs connector connected
+  - upstream artifacts linked
+expected_outputs:
+  - readiness result
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - approved PRD is missing

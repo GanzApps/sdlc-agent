@@ -1,0 +1,16 @@
+command: /agent-devops-init
+agent: devops-agent
+purpose: Verify deployment or infrastructure readiness.
+required_inputs:
+  - environment request
+required_artifacts:
+  - deployment or infrastructure ticket
+required_checks:
+  - tickets connector connected
+  - code connector connected
+  - target environment identified
+expected_outputs:
+  - readiness result
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - target environment is unknown

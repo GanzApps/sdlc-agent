@@ -1,0 +1,18 @@
+command: /agent-planner-plan
+agent: planner-agent
+purpose: Clarify planning direction, constraints, and dependencies.
+required_inputs:
+  - approved PRD
+  - approved technical design
+required_artifacts:
+  - approved PRD
+  - approved technical design
+required_checks:
+  - target repositories identified
+  - planning constraints identified
+expected_outputs:
+  - planning summary
+  - dependency map
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - target repositories are undefined

@@ -1,0 +1,17 @@
+command: /ai-sync
+agent: framework
+purpose: Preview and apply framework-managed updates with approval.
+required_inputs:
+  - approval before apply
+required_artifacts:
+  - ai-sdlc.manifest.yml
+required_checks:
+  - compare framework-managed files
+  - protect workspace-local files
+expected_outputs:
+  - sync preview
+  - approved updates
+allowed_statuses: [review, done, blocked]
+blocked_when:
+  - framework source cannot be compared
+  - user approval is not granted

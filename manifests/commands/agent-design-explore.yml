@@ -1,0 +1,15 @@
+command: /agent-design-explore
+agent: design-agent
+purpose: Compare UX or UI options before committing the design direction.
+required_inputs:
+  - design decision topic
+required_artifacts:
+  - approved PRD
+required_checks:
+  - decision criteria are clear
+expected_outputs:
+  - option comparison
+  - design recommendation
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - decision topic is undefined

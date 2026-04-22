@@ -1,0 +1,15 @@
+command: /agent-incident-context
+agent: incident-engineer-agent
+purpose: Build trace context and define a safe incident fix scope.
+required_inputs:
+  - TRACE_CONTEXT
+required_artifacts:
+  - incident ticket
+required_checks:
+  - trace context is complete
+expected_outputs:
+  - incident context summary
+  - proposed fix boundary
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - TRACE_CONTEXT is incomplete

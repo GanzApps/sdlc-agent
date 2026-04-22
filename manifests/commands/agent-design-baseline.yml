@@ -1,0 +1,14 @@
+command: /agent-design-baseline
+agent: design-agent
+purpose: Confirm or create the design-system baseline.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+required_checks:
+  - baseline existence checked
+expected_outputs:
+  - baseline status
+  - baseline artifact URL when created or updated
+allowed_statuses: [draft, review, blocked]
+blocked_when:
+  - design baseline decision cannot be made

@@ -5,6 +5,7 @@ node_modules/
 coverage/
 .env
 .agent-config.yml
+.claude/
 plugins/google-stitch/.env
 *.log
 .DS_Store

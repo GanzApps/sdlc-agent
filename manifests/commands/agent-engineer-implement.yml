@@ -1,0 +1,18 @@
+command: /agent-engineer-implement
+agent: engineer-agent
+purpose: Implement the scoped ticket and attach evidence.
+required_inputs: []
+required_artifacts:
+  - ready ticket
+  - approved upstream artifacts
+required_checks:
+  - repository alignment confirmed
+  - tests and evidence completed
+expected_outputs:
+  - merge or pull request URL
+  - evidence artifact links
+  - handoff packet
+allowed_statuses: [review, done, blocked]
+blocked_when:
+  - repository alignment fails
+  - required verification evidence is missing

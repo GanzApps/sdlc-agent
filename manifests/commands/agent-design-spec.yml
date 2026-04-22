@@ -1,0 +1,17 @@
+command: /agent-design-spec
+agent: design-agent
+purpose: Create or update the design artifact in the configured design tool.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+  - design baseline status
+required_checks:
+  - design connector connected
+  - design references linked
+expected_outputs:
+  - design artifact URL
+  - handoff packet
+allowed_statuses: [draft, review, blocked]
+blocked_when:
+  - design connector is not connected
+  - baseline status is unknown

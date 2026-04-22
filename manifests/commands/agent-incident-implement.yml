@@ -1,0 +1,16 @@
+command: /agent-incident-implement
+agent: incident-engineer-agent
+purpose: Implement the remediation and attach root-cause evidence.
+required_inputs: []
+required_artifacts:
+  - incident ticket
+  - incident context
+required_checks:
+  - fix is bounded and verified
+expected_outputs:
+  - fix PR URL
+  - verification evidence
+  - handoff packet
+allowed_statuses: [review, done, blocked]
+blocked_when:
+  - verification evidence is missing

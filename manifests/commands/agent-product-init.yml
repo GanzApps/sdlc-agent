@@ -1,0 +1,16 @@
+command: /agent-product-init
+agent: product-agent
+purpose: Verify product readiness and locate the intake artifact.
+required_inputs:
+  - intake artifact link or location
+required_artifacts: []
+required_checks:
+  - docs connector connected
+  - delivery record exists or can be created
+expected_outputs:
+  - readiness result
+  - missing-context list
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - docs connector is not connected
+  - intake artifact cannot be found

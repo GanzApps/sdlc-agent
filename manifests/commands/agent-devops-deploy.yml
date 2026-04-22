@@ -1,0 +1,16 @@
+command: /agent-devops-deploy
+agent: devops-agent
+purpose: Execute the approved infrastructure or deployment path and record verification.
+required_inputs: []
+required_artifacts:
+  - approved deployment plan
+required_checks:
+  - human approval confirmed
+  - verification evidence captured
+expected_outputs:
+  - deployment record URL
+  - handoff packet
+allowed_statuses: [review, done, blocked]
+blocked_when:
+  - approval is missing
+  - verification evidence is missing

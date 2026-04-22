@@ -1,0 +1,16 @@
+command: /agent-incident-init
+agent: incident-engineer-agent
+purpose: Verify incident readiness and response inputs.
+required_inputs:
+  - incident ticket
+required_artifacts:
+  - incident ticket
+required_checks:
+  - tickets connector connected
+  - code connector connected
+  - incident scope is bounded
+expected_outputs:
+  - readiness result
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - incident ticket is missing

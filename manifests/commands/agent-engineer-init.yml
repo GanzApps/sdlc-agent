@@ -1,0 +1,20 @@
+command: /agent-engineer-init
+agent: engineer-agent
+purpose: Verify ticket readiness and repository alignment before implementation.
+required_inputs:
+  - ready ticket
+required_artifacts:
+  - ticket
+required_checks:
+  - docs connector connected
+  - tickets connector connected
+  - code connector connected
+  - target repository alignment confirmed
+expected_outputs:
+  - readiness result
+  - blocked handoff when misaligned
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - ticket is not Ready
+  - target repository is missing
+  - current workspace does not match the target repository

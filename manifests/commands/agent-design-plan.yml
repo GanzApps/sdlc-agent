@@ -1,0 +1,16 @@
+command: /agent-design-plan
+agent: design-agent
+purpose: Clarify design scope and work mode before producing the design spec.
+required_inputs:
+  - approved PRD
+required_artifacts:
+  - approved PRD
+required_checks:
+  - scope is bounded
+  - assumptions are explicit
+expected_outputs:
+  - design scope summary
+  - open questions
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - design scope remains unclear

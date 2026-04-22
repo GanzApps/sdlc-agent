@@ -1,0 +1,21 @@
+command: /ai-init
+agent: framework
+purpose: Initialize or repair workspace readiness.
+required_inputs:
+  - workspace identity
+  - executor choice
+  - connector setup choices
+required_artifacts: []
+required_checks:
+  - detect workspace mode
+  - validate config schema
+  - validate required framework files
+  - validate connector settings
+expected_outputs:
+  - updated .agent-config.yml
+  - updated ai-sdlc.manifest.yml
+  - readiness result
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - workspace root cannot be determined
+  - required setup answers are missing

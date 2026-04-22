@@ -1,0 +1,16 @@
+command: /agent-product-prd
+agent: product-agent
+purpose: Create or update the PRD artifact.
+required_inputs: []
+required_artifacts:
+  - intake artifact
+required_checks:
+  - docs connector connected
+  - PRD sections complete enough for review
+expected_outputs:
+  - PRD URL
+  - handoff packet
+allowed_statuses: [draft, review, blocked]
+blocked_when:
+  - docs connector is not connected
+  - critical PRD sections are missing

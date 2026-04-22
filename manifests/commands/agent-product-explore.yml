@@ -1,0 +1,15 @@
+command: /agent-product-explore
+agent: product-agent
+purpose: Explore options and best practices before locking the PRD direction.
+required_inputs:
+  - decision topic
+required_artifacts:
+  - intake artifact
+required_checks:
+  - decision criteria are clear
+expected_outputs:
+  - option comparison
+  - recommendation
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - decision topic is undefined

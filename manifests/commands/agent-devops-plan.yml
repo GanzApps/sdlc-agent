@@ -1,0 +1,16 @@
+command: /agent-devops-plan
+agent: devops-agent
+purpose: Plan rollout path, dependencies, and approvals.
+required_inputs:
+  - approved environment request
+required_artifacts:
+  - deployment or infrastructure ticket
+required_checks:
+  - dependencies identified
+  - approval gate identified
+expected_outputs:
+  - rollout plan
+  - dependency summary
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - required dependencies are unresolved

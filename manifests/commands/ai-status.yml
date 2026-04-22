@@ -1,0 +1,20 @@
+command: /ai-status
+agent: framework
+purpose: Report workspace readiness, risks, and recommended next action.
+required_inputs: []
+required_artifacts:
+  - .agent-config.yml
+  - ai-sdlc.manifest.yml
+required_checks:
+  - detect workspace mode
+  - validate connector readiness
+  - validate knowledge contracts
+  - validate framework scaffolding
+expected_outputs:
+  - status summary
+  - blockers list
+  - risks list
+  - recommended next command
+allowed_statuses: [ready]
+blocked_when:
+  - workspace is not initialized

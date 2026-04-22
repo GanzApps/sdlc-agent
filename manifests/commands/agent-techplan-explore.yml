@@ -1,0 +1,15 @@
+command: /agent-techplan-explore
+agent: techplan-agent
+purpose: Compare technical options before writing the final technical design.
+required_inputs:
+  - decision topic
+required_artifacts:
+  - approved PRD
+required_checks:
+  - tradeoff criteria are known
+expected_outputs:
+  - option comparison
+  - recommended path
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - decision topic is undefined

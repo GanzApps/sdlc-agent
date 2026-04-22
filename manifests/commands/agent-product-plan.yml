@@ -1,0 +1,17 @@
+command: /agent-product-plan
+agent: product-agent
+purpose: Clarify scope and detect product work mode.
+required_inputs:
+  - business goal
+required_artifacts:
+  - intake artifact
+required_checks:
+  - work mode detected
+  - missing business context identified
+expected_outputs:
+  - scope summary
+  - work mode
+  - open questions
+allowed_statuses: [draft, ready, blocked]
+blocked_when:
+  - business goal remains unclear

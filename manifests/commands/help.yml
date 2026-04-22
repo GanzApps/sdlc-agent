@@ -1,0 +1,14 @@
+command: /help
+agent: framework
+purpose: Show context-aware command discovery and the recommended next step.
+required_inputs: []
+required_artifacts: []
+required_checks:
+  - detect workspace mode
+  - assess workspace readiness
+expected_outputs:
+  - command catalog
+  - current workspace status
+  - recommended next command
+allowed_statuses: [ready]
+blocked_when: []

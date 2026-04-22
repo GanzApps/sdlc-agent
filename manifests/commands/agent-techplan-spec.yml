@@ -1,0 +1,16 @@
+command: /agent-techplan-spec
+agent: techplan-agent
+purpose: Create the technical design artifact.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+  - design artifact or explicit baseline decision
+required_checks:
+  - docs connector connected
+  - impacted modules and repositories identified
+expected_outputs:
+  - technical design URL
+  - handoff packet
+allowed_statuses: [draft, review, blocked]
+blocked_when:
+  - upstream product or design context is incomplete

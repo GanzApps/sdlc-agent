@@ -1,0 +1,16 @@
+command: /agent-planner-init
+agent: planner-agent
+purpose: Verify planning readiness and ticket tool access.
+required_inputs: []
+required_artifacts:
+  - approved PRD
+  - approved technical design
+required_checks:
+  - docs connector connected
+  - tickets connector connected
+expected_outputs:
+  - readiness result
+allowed_statuses: [ready, blocked]
+blocked_when:
+  - tickets connector is not connected
+  - required upstream artifacts are missing
